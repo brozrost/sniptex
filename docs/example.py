@@ -30,4 +30,6 @@ def extract_tagged_block(text: str, tag: str) -> str:
     if end_index is None:
         raise SniptexError("End tag not found for `{tag}`")
     
+    # sniptex-start return
     return "\n".join(lines[start_index + 1:end_index])
+    # sniptex-end return
