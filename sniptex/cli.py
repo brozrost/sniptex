@@ -11,13 +11,16 @@ def main() -> int:
         description="SnipTeX is a Python package for extracting tagged code snippets from local files or remote sources. " \
         "It locates marked regions in source code and returns their contents for further processing or integration into other tools.",
         usage="""
-        sniptex -h/--help
+        sniptex --help
 
-        sniptex -s/--source <url/file path> -t/--tag <tag>
-            Example: sniptex -s https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example.py -t 1
+        sniptex --source <file path> --tag <tag>
+            sniptex -s example.py -t demo
 
-        sniptex -s/--source <url/file path> -t/--tag <tag> -o/--out <out file>
-            Example: sniptex -s https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example.py -t 1 -o out/out.txt
+        sniptex --source <file path> --tag <tag> --out <out file path>
+            sniptex -s example.py -t demo -o out/out.txt
+
+        sniptex --source <url> --tag <tag>
+            sniptex -s https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example.py -t demo
         """
     )
 
