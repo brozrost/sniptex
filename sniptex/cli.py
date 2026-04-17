@@ -8,8 +8,8 @@ from sniptex import validate
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="SnipTeX is a Python package for extracting tagged code snippets from local files or remote sources. " \
-        "It locates marked regions in source code and returns their contents for further processing or integration into other tools.",
+        description="SnipTeX is a Python package for extracting tagged code snippets " \
+        "from local files or remote sources.",
         usage="""
         sniptex --help
 
@@ -27,7 +27,7 @@ def main() -> int:
     parser.add_argument(
         "-s", "--source", 
         required=True, 
-        help="Path to the local source file."
+        help="Path to a local file or URL"
     )
     parser.add_argument(
         "-t", "--tag", 
