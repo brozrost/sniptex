@@ -1,4 +1,4 @@
-SnipTeX is a Python package for extracting tagged code snippets from local files or remote sources. It serves as the backend for the SnipTeX LaTeX package, enabling dynamic inclusion of code snippets directly in documents.
+SnipTeX is a Python package for extracting tagged code snippets from local files or remote URLs (e.g. GitHub raw files). It serves as the backend for the SnipTeX LaTeX package, enabling dynamic inclusion of code snippets directly in documents.
 
 <div align="center">
   <a href="https://github.com/brozrost/sniptex/actions">
