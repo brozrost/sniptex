@@ -15,12 +15,12 @@ def extract_tagged_block(text: str, tag: str) -> str:
     for i, line in enumerate(lines):
         if start_marker in line:
             if start_index is not None:
-                raise SniptexError(f"Multiple start tags found for `{tag}`")
+                raise SniptexError(f"Multiple start tags found for '{tag}'")
 
             start_index = i
 
     if start_index is None:
-        raise SniptexError(f"Start tag not found for `{tag}`")
+        raise SniptexError(f"Start tag not found for '{tag}'")
     
     for i in range(start_index + 1, len(lines)):
         if end_marker in lines[i]:
@@ -28,7 +28,7 @@ def extract_tagged_block(text: str, tag: str) -> str:
             break
 
     if end_index is None:
-        raise SniptexError(f"End tag not found for `{tag}`")
+        raise SniptexError(f"End tag not found for '{tag}'")
     
     return "\n".join(lines[start_index + 1:end_index])
 

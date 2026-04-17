@@ -3,53 +3,31 @@ from sniptex import extractor
 PATH = "./docs/example.py"
 
 TEXT = """
-def extract_tagged_block(text: str, tag: str) -> str:
-    start_marker = f"sniptex-start {tag}"
-    end_marker = f"sniptex-end {tag}"
+# sniptex-start demo
+def main():
+    x = 1
+    y = 2
+    print(x + y)
 
-    lines = text.splitlines()
+    return 0
+# sniptex-end demo
 
-    start_index = None
-    end_index = None
+if __name__ == "__main__":
+    import sys
+    sys.exit(main())"""
 
-    # sniptex-start 1
-    for i, line in enumerate(lines):
-        if start_marker in line:
-            if start_index is not None:
-                raise SniptexError("Multiple start tags found for `{tag}`")
+OUT = """def main():
+    x = 1
+    y = 2
+    print(x + y)
 
-            start_index = i
-
-    if start_index is None:
-        raise SniptexError("Start tag not found for `{tag}`")
-    # sniptex-end 1
-    
-    for i in range(start_index + 1, len(lines)):
-        if end_marker in lines[i]:
-            end_index = i
-            break
-
-    if end_index is None:
-        raise SniptexError("End tag not found for `{tag}`")
-    
-    return "\n".join(lines[start_index + 1:end_index])
-"""
-
-OUT = """    for i, line in enumerate(lines):
-        if start_marker in line:
-            if start_index is not None:
-                raise SniptexError("Multiple start tags found for `{tag}`")
-
-            start_index = i
-
-    if start_index is None:
-        raise SniptexError("Start tag not found for `{tag}`")"""
+    return 0"""
 
 def test_extract_tagged_block():
-    assert extractor.extract_tagged_block(TEXT, "1") == OUT
+    assert extractor.extract_tagged_block(TEXT, "demo") == OUT
 
 def test_extract_from_file():
-    assert extractor.extract_from_file(PATH, "1") == OUT
+    assert extractor.extract_from_file(PATH, "demo") == OUT
 
 def test_missing_start_tag():
     text = """
@@ -61,7 +39,7 @@ def test_missing_start_tag():
         extractor.extract_tagged_block(text, "1")
         assert False, "Expected SniptexError"
     except extractor.SniptexError as err:
-        assert str(err) == "Start tag not found for `1`"
+        assert str(err) == "Start tag not found for '1'"
 
 
 def test_missing_end_tag():
@@ -74,7 +52,7 @@ def test_missing_end_tag():
         extractor.extract_tagged_block(text, "1")
         assert False, "Expected SniptexError"
     except extractor.SniptexError as err:
-        assert str(err) == "End tag not found for `1`"
+        assert str(err) == "End tag not found for '1'"
 
 
 def test_multiple_start_tags():
@@ -90,7 +68,7 @@ def test_multiple_start_tags():
         extractor.extract_tagged_block(text, "1")
         assert False, "Expected SniptexError"
     except extractor.SniptexError as err:
-        assert str(err) == "Multiple start tags found for `1`"
+        assert str(err) == "Multiple start tags found for '1'"
 
 def test_missing_file():
     try:
