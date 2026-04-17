@@ -14,10 +14,10 @@ def main() -> int:
         sniptex -h/--help
 
         sniptex -s/--source <url/file path> -t/--tag <tag>
-            Example: sniptex -s https://raw.githubusercontent.com/brozrost/sniptex/refs/heads/main/docs/example.py -t 1
+            Example: sniptex -s https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example.py -t 1
 
         sniptex -s/--source <url/file path> -t/--tag <tag> -o/--out <out file>
-            Example: sniptex -s https://raw.githubusercontent.com/brozrost/sniptex/refs/heads/main/docs/example.py -t 1 -o out/out.txt
+            Example: sniptex -s https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example.py -t 1 -o out/out.txt
         """
     )
 
