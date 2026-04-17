@@ -1,10 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "sniptex"
 version = "1.0.0"
-description = "..."
+description = "Python package for extracting tagged code snippets from local files or remote sources."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["requests"]
+authors = [
+    { name = "Rostislav Brož" }
+]
+license = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/brozrost/sniptex"
+Repository = "https://github.com/brozrost/sniptex"
 
 [tool.setuptools]
 packages = ["sniptex"]
