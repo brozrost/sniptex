@@ -30,55 +30,66 @@
 
 \newlength{\sniptexnumberwidth}
 \newlength{\sniptexleftpadding}
+\newlength{\sniptexboxwidth}
+\setlength{\sniptexboxwidth}{0.9\linewidth}
 
-\newcommand{\sniptexbox}[3]{
-    \begin{tcolorbox}[
-        colback=sniptexbg,
-        colframe=sniptexbg,
-        boxrule=0pt,
-        arc=3mm,
-        left=\sniptexleftpadding,
-        right=3mm,
-        top=2mm,
-        bottom=2mm,
-        boxsep=0pt
-    ]
-    \inputminted[
-        linenos,
-        firstnumber=\number\numexpr\sniptexfirstline\relax,
-        numbersep=10pt,
-        fontsize=\footnotesize,
-        breaklines,
-        tabsize=4,
-        breaksymbolleft={},
-        breaksymbolright={},
-        breakindent=1.5em,
-        breakautoindent=true,
-        #3
-    ]{#2}{#1}
-    \end{tcolorbox}
+\newcommand{\sniptexbox}[4]{
+    \begin{center}
+        \begin{tcolorbox}[
+            colback=sniptexbg,
+            colframe=sniptexbg,
+            boxrule=0pt,
+            arc=3mm,
+            left=\sniptexleftpadding,
+            right=3mm,
+            top=2mm,
+            bottom=2mm,
+            boxsep=0pt,
+            width=\sniptexboxwidth,
+        ]
+        \inputminted[
+            linenos,
+            firstnumber=\number\numexpr\sniptexfirstline\relax,
+            numbersep=10pt,
+            fontsize=\scriptsize,
+            baselinestretch=1.15,
+            breaklines,
+            tabsize=4,
+            breaksymbolleft={},
+            breaksymbolright={},
+            breakindent=1.5em,
+            breakautoindent=true,
+            #3
+        ]{#2}{#1}
+        \end{tcolorbox}
+
+        \if\relax\detokenize{#4}\relax
+        \else
+            {\footnotesize{#4}\par}
+        \fi
+    \end{center}
 }
 
 \newcounter{sniptexsnippet}
 
-\newcommand{\IncludeCode}[4][]{
-  \stepcounter{sniptexsnippet}
+\newcommand{\IncludeCode}[5][]{
+    \stepcounter{sniptexsnippet}
 
-  \edef\sniptexoutfile{sniptex-\arabic{sniptexsnippet}.tmp}
+    \edef\sniptexoutfile{sniptex-\arabic{sniptexsnippet}.tmp}
 
-  \immediate\write18{sniptex -s "#2" -t "#3" -o "\sniptexoutfile"}
+    \immediate\write18{sniptex -s "#2" -t "#3" -o "\sniptexoutfile"}
 
-  \openin\sniptexlinefile=\sniptexoutfile.meta
-  \read\sniptexlinefile to \sniptexfirstline
-  \read\sniptexlinefile to \sniptexlastline
-  \closein\sniptexlinefile
-  
-  \settowidth{\sniptexnumberwidth}{\scriptsize\texttt{\sniptexlastline}}
-  \setlength{\sniptexleftpadding}{\sniptexnumberwidth}
-  \addtolength{\sniptexleftpadding}{18pt}
+    \openin\sniptexlinefile=\sniptexoutfile.meta
+    \read\sniptexlinefile to \sniptexfirstline
+    \read\sniptexlinefile to \sniptexlastline
+    \closein\sniptexlinefile
+    
+    \settowidth{\sniptexnumberwidth}{\scriptsize\texttt{\sniptexlastline}}
+    \setlength{\sniptexleftpadding}{\sniptexnumberwidth}
+    \addtolength{\sniptexleftpadding}{20pt}
 
-  \sniptexbox{\sniptexoutfile}{#4}{#1}
+    \sniptexbox{\sniptexoutfile}{#4}{#1}{#5}
 
-  \immediate\write18{rm -f "\sniptexoutfile"}
-  \immediate\write18{rm -f "\sniptexoutfile.meta"}
+    \immediate\write18{rm -f "\sniptexoutfile"}
+    \immediate\write18{rm -f "\sniptexoutfile.meta"}
 }
