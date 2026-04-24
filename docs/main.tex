@@ -1,11 +1,25 @@
 \documentclass{article}
 
+\usepackage[a4paper,margin=2cm]{geometry}
+
 \usepackage{sniptex}
 
 \begin{document}
 
-\IncludeCode{docs/example.py}{demo}{Python}
+\section*{Snip\TeX}
 
-\IncludeCode{https://raw.githubusercontent.com/brozrost/sniptex/refs/heads/main/docs/example2.py}{1}{Python}
+Snip\TeX{} je La\TeX{}ový balíček pro vkládání označených úryvků kódu ze zdrojových 
+souborů nebo vzdálených repozitářů dostupných přes webové odkazy. 
+Extrahuje označené části kódu a sází je jednotným stylem, čímž podporuje reprodukovatelnou a udržitelnou dokumentaci.
+
+\subsection*{Lokální úryvek}
+
+\IncludeCode[firstnumber=1]{docs/example2.py}{comm}{Python}{}
+
+\IncludeCode{docs/example.py}{demo}{Python}{Snippet 1: Local code snippet}
+
+\subsection*{Snippet from a remote URL}
+
+\IncludeCode[]{https://raw.githubusercontent.com/brozrost/sniptex/refs/heads/main/docs/example2.py}{1}{Python}{Snippet 2: Code snippet from a remote URL}
 
 \end{document}
