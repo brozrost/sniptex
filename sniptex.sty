@@ -2,8 +2,40 @@
 \ProvidesPackage{sniptex}[2026/04/24 SnipTeX - Package for including tagged code snippets.]
 
 \RequirePackage{iftex}
-\RequirePackage{xparse}
+\RequirePackage{xcolor}
 \RequirePackage{minted}
+\RequirePackage{tcolorbox}
+
+\usemintedstyle{github-dark}
+
+\definecolor{sniptexbg}{HTML}{161B22}
+\definecolor{sniptexline}{HTML}{6E7681}
+
+\renewcommand{\theFancyVerbLine}{
+  \scriptsize\textcolor{sniptexline}{\arabic{FancyVerbLine}}%
+}
+
+\newcommand{\sniptexbox}[2]{
+    \begin{tcolorbox}[
+        colback=sniptexbg,
+        colframe=sniptexbg,
+        boxrule=0pt,
+        arc=2mm,
+        left=8mm,
+        right=3mm,
+        top=2mm,
+        bottom=2mm,
+        boxsep=0pt
+    ]
+    \inputminted[
+        numbers=left,
+        numbersep=10pt,
+        fontsize=\small,
+        breaklines,
+        tabsize=4
+        ]{#2}{#1}
+    \end{tcolorbox}
+}
 
 \ifLuaTeX
 \else
@@ -12,15 +44,14 @@
 
 \newcounter{sniptexsnippet}
 
-\NewDocumentCommand{\IncludeCode}{m m m}
-{
+\newcommand{\IncludeCode}[3]{
   \stepcounter{sniptexsnippet}
 
   \edef\sniptexoutfile{sniptex-\arabic{sniptexsnippet}.tmp}
 
   \immediate\write18{sniptex -s "#1" -t "#2" -o "\sniptexoutfile"}
 
-  \inputminted{#3}{\sniptexoutfile}
+  \sniptexbox{\sniptexoutfile}{#3}
 
   \immediate\write18{rm -f "\sniptexoutfile"}
 }
