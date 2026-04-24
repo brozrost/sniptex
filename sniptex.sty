@@ -6,41 +6,54 @@
 \RequirePackage{minted}
 \RequirePackage{tcolorbox}
 
+\ifLuaTeX
+\else
+  \PackageError{sniptex}{SnipTeX requires LuaLaTeX}{Use lualatex instead}
+\fi
+
 \usemintedstyle{github-dark}
 
 \definecolor{sniptexbg}{HTML}{161B22}
 \definecolor{sniptexline}{HTML}{6E7681}
 
 \renewcommand{\theFancyVerbLine}{
-  \scriptsize\textcolor{sniptexline}{\arabic{FancyVerbLine}}%
+    \scriptsize\textcolor{sniptexline}{\arabic{FancyVerbLine}}
 }
+
+\def\sniptexfirstline{1}
+\def\sniptexlastline{1}
+
+\newread\sniptexlinefile
+
+\newlength{\sniptexnumberwidth}
+\newlength{\sniptexleftpadding}
 
 \newcommand{\sniptexbox}[2]{
     \begin{tcolorbox}[
         colback=sniptexbg,
         colframe=sniptexbg,
         boxrule=0pt,
-        arc=2mm,
-        left=8mm,
+        arc=3mm,
+        left=\sniptexleftpadding,
         right=3mm,
         top=2mm,
         bottom=2mm,
         boxsep=0pt
     ]
     \inputminted[
-        numbers=left,
+        linenos,
+        firstnumber=\number\numexpr\sniptexfirstline\relax,
         numbersep=10pt,
         fontsize=\small,
         breaklines,
-        tabsize=4
-        ]{#2}{#1}
+        tabsize=4,
+        breaksymbolleft={},
+        breaksymbolright={},
+        breakindent=1.5em,
+        breakautoindent=true,
+    ]{#2}{#1}
     \end{tcolorbox}
 }
-
-\ifLuaTeX
-\else
-  \PackageError{sniptex}{SnipTeX requires LuaLaTeX}{Use lualatex instead}
-\fi
 
 \newcounter{sniptexsnippet}
 
@@ -51,7 +64,17 @@
 
   \immediate\write18{sniptex -s "#1" -t "#2" -o "\sniptexoutfile"}
 
+  \openin\sniptexlinefile=\sniptexoutfile.meta
+  \read\sniptexlinefile to \sniptexfirstline
+  \read\sniptexlinefile to \sniptexlastline
+  \closein\sniptexlinefile
+  
+  \settowidth{\sniptexnumberwidth}{\scriptsize\texttt{\sniptexlastline}}
+  \setlength{\sniptexleftpadding}{\sniptexnumberwidth}
+  \addtolength{\sniptexleftpadding}{18pt}
+
   \sniptexbox{\sniptexoutfile}{#3}
 
   \immediate\write18{rm -f "\sniptexoutfile"}
+  \immediate\write18{rm -f "\sniptexoutfile.meta"}
 }
