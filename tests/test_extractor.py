@@ -24,10 +24,12 @@ OUT = """def main():
     return 0"""
 
 def test_extract_tagged_block():
-    assert extractor.extract_tagged_block(TEXT, "demo") == OUT
+    snippet, first_line_num, last_line_num = extractor.extract_tagged_block(TEXT, "demo")
+    assert snippet == OUT
 
 def test_extract_from_file():
-    assert extractor.extract_from_file(PATH, "demo") == OUT
+    snippet, first_line_num, last_line_num = extractor.extract_from_file(PATH, "demo")
+    assert snippet == OUT
 
 def test_missing_start_tag():
     text = """
