@@ -16,7 +16,7 @@ def extract_tagged_block(text: str, tag: str):
     start_index = None
     end_index = None
 
-    # sniptex-start demo
+    # sniptex-start 1
     for i, line in enumerate(lines):
         if start_marker in line:
             if start_index is not None:
@@ -26,7 +26,7 @@ def extract_tagged_block(text: str, tag: str):
 
     if start_index is None:
         raise SniptexError(f"Start tag not found for '{tag}'")
-    # sniptex-end demo
+    # sniptex-end 1
     
     for i in range(start_index + 1, len(lines)):
         if end_marker in lines[i]:
