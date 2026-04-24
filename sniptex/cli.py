@@ -49,7 +49,7 @@ def main() -> int:
         else:
             text = Path(args.source).read_text(encoding="utf-8")
 
-        snippet = extractor.extract_tagged_block(text, args.tag)
+        snippet, first_line_num, last_line_num = extractor.extract_tagged_block(text, args.tag)
 
     except fetcher.FetcherError as exc:
         print(f"Error: {exc}", file=sys.stderr)
@@ -68,6 +68,9 @@ def main() -> int:
 
         try:
             output_path.write_text(snippet, encoding="utf-8")
+
+            meta_path = Path(str(output_path) + ".meta")
+            meta_path.write_text(f"{first_line_num}\n{last_line_num}", encoding="utf-8")
         except OSError as exc:
             print(f"Error: Could not write file: {output_path}")
             return 1

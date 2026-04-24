@@ -3,7 +3,7 @@ from pathlib import Path
 class SniptexError(RuntimeError):
     pass
 
-def extract_tagged_block(text: str, tag: str) -> str:
+def extract_tagged_block(text: str, tag: str):
     start_marker = f"sniptex-start {tag}"
     end_marker = f"sniptex-end {tag}"
 
@@ -30,7 +30,7 @@ def extract_tagged_block(text: str, tag: str) -> str:
     if end_index is None:
         raise SniptexError(f"End tag not found for '{tag}'")
     
-    return "\n".join(lines[start_index + 1:end_index])
+    return "\n".join(lines[start_index + 1:end_index]), start_index + 2, end_index
 
 def extract_from_file(path: str | Path, tag: str) -> str:
     file_path = Path(path)
