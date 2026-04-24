@@ -1,0 +1,26 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sniptex}[2026/04/24 SnipTeX - Package for including tagged code snippets.]
+
+\RequirePackage{iftex}
+\RequirePackage{xparse}
+\RequirePackage{minted}
+
+\ifLuaTeX
+\else
+  \PackageError{sniptex}{SnipTeX requires LuaLaTeX}{Use lualatex instead}
+\fi
+
+\newcounter{sniptexsnippet}
+
+\NewDocumentCommand{\IncludeCode}{m m m}
+{
+  \stepcounter{sniptexsnippet}
+
+  \edef\sniptexoutfile{sniptex-\arabic{sniptexsnippet}.tmp}
+
+  \immediate\write18{sniptex -s "#1" -t "#2" -o "\sniptexoutfile"}
+
+  \inputminted{#3}{\sniptexoutfile}
+
+  \immediate\write18{rm -f "\sniptexoutfile"}
+}
