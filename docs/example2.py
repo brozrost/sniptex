@@ -26,6 +26,10 @@ def extract_tagged_block(text: str, tag: str):
 
     if start_index is None:
         raise SniptexError(f"Start tag not found for '{tag}'")
+    
+
+
+    
     # sniptex-end 1
     
     for i in range(start_index + 1, len(lines)):
