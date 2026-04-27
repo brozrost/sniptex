@@ -12,14 +12,35 @@ Snip\TeX{} je La\TeX{}ový balíček pro vkládání označených úryvků kódu
 souborů nebo vzdálených repozitářů dostupných přes webové odkazy. 
 Extrahuje označené části kódu a sází je jednotným stylem, čímž podporuje reprodukovatelnou a udržitelnou dokumentaci.
 
-\subsection*{Lokální úryvek}
+\subsection*{Použití}
 
-\IncludeCode[firstnumber=1]{docs/example2.py}{comm}{Python}{}
+Snip\TeX{} definuje příkaz \textbackslash{}IncludeCode, který se používá následovně:
 
-\IncludeCode{docs/example.py}{demo}{Python}{Snippet 1: Local code snippet}
+\IncludeCode[firstnumber=1]{docs/example2.py}{comm1}{cpp}{}
 
-\subsection*{Snippet from a remote URL}
+Nepovinný argument \textit{options} umožňuje uživateli přepsat nastavení formátovaní kódu 
+(o tom více v kapitole Technická dokumentace). Povinný argument \textit{source} definuje zdroj, odkud se má
+úrvek kódu převzít. Argument může být ve formě cesty k lokálnímu souboru, nebo odkazu na webovou stránku.
+Snip\TeX{} dokáže tyto možnosti sám rozlišit. Povinný argument \textit{tag} specifikuje 
+unikátní klíčové slovo, které označuje jeden úryvek kódu. Tag musí být oddělený přesně jednou mezerou a 
+následovat za frázemi sniptex-start and sniptex-end, které úryvek vymezují (Úryvek 1).
 
-\IncludeCode[]{https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example2.py}{1}{Python}{Snippet 2: Code snippet from a remote URL}
+\IncludeCode{docs/example.py}{demo}{Python}{Úryvek 1: Ukázka používání tagů.}
+
+Povinným argumentem \textit{language} uživatel zvolí programovací jazyk, v jehož stylu má 
+být kód v úryvku zvýrazněn. Posledním argumentem je popisek, který může být i prázdný. 
+Nicméně složené závorky je potřeba psát i pro prázdný popisek.
+
+\subsubsection*{Lokální úryvek}
+
+\IncludeCode[firstnumber=1]{docs/example2.py}{comm2}{cpp}{}
+
+\IncludeCode{docs/example.py}{tag1}{Python}{Úryvek 2: Úryvek kódu z lokálního souboru.}
+
+\subsubsection*{Úryvek z webové stránky}
+
+\IncludeCode[firstnumber=1]{docs/example2.py}{comm3}{cpp}{}
+
+\IncludeCode[]{https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example2.py}{tag2}{Python}{Úryvek 2: Úryvek kódu z webové stránky.}
 
 \end{document}
