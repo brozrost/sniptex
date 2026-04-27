@@ -4,16 +4,22 @@ sniptex-start comm1
 sniptex-end comm1
 
 sniptex-start comm2
-\IncludeCode{docs/example.py}{tag1}{Python}{Snippet 1: ...}
+\IncludeCode{example.py}{tag1}{Python}{Úryvek 2: ...}
 sniptex-end comm2
 
 sniptex-start comm3
-\IncludeCode{raw.githubusercontent.com/...}{tag2}{Python}{Snippet 2: ...}
+\IncludeCode{raw.githubusercontent.com/brozrost /sniptex/main/docs/example2.py}{tag2}{Python}{Úryvek 3: ...}
 sniptex-end comm3
 """
 
+import re
+
 class SniptexError(RuntimeError):
     pass
+
+def marker_matches(line: str, marker: str) -> bool:
+    pattern = rf"{re.escape(marker)}(?!\S)"
+    return re.search(pattern, line) is not None
 
 def extract_tagged_block(text: str, tag: str):
     start_marker = f"sniptex-start {tag}"
@@ -26,7 +32,7 @@ def extract_tagged_block(text: str, tag: str):
 
     # sniptex-start tag2
     for i, line in enumerate(lines):
-        if start_marker in line:
+        if marker_matches(line, start_marker):
             if start_index is not None:
                 raise SniptexError(f"Multiple start tags found for '{tag}'")
 
