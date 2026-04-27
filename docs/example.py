@@ -1,10 +1,12 @@
 # sniptex-start demo
+# sniptex-start tag1
 def main():
     x = 1
     y = 2
     print(x + y)
 
     return 0
+# sniptex-end tag1
 # sniptex-end demo
 
 if __name__ == "__main__":
