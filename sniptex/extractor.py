@@ -1,7 +1,12 @@
+import re
 from pathlib import Path
 
 class SniptexError(RuntimeError):
     pass
+
+def marker_matches(line: str, marker: str) -> bool:
+    pattern = rf"{re.escape(marker)}(?!\S)"
+    return re.search(pattern, line) is not None
 
 def extract_tagged_block(text: str, tag: str):
     start_marker = f"sniptex-start {tag}"
@@ -13,7 +18,7 @@ def extract_tagged_block(text: str, tag: str):
     end_index = None
 
     for i, line in enumerate(lines):
-        if start_marker in line:
+        if marker_matches(line, start_marker):
             if start_index is not None:
                 raise SniptexError(f"Multiple start tags found for '{tag}'")
 
@@ -23,7 +28,7 @@ def extract_tagged_block(text: str, tag: str):
         raise SniptexError(f"Start tag not found for '{tag}'")
     
     for i in range(start_index + 1, len(lines)):
-        if end_marker in lines[i]:
+        if marker_matches(lines[i], end_marker):
             end_index = i
             break
 
