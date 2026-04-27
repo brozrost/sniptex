@@ -1,3 +1,5 @@
+% lualatex --shell-escape docs/main.tex 
+
 \documentclass{article}
 
 \usepackage[a4paper,margin=2cm]{geometry}
@@ -8,9 +10,10 @@
 
 \section*{Snip\TeX}
 
-Snip\TeX{} je La\TeX{}ový balíček pro vkládání označených úryvků kódu ze zdrojových 
-souborů nebo vzdálených repozitářů dostupných přes webové odkazy. 
-Extrahuje označené části kódu a sází je jednotným stylem, čímž podporuje reprodukovatelnou a udržitelnou dokumentaci.
+Snip\TeX{} je La\TeX{}ový balíček pro vkládání označených úryvků kódu z lokálních souborů 
+nebo vzdálených repozitářů dostupných přes webové odkazy. 
+Extrahuje označené části kódu a sází je jednotným stylem, 
+čímž podporuje reprodukovatelnou a udržitelnou dokumentaci.
 
 \subsection*{Použití}
 
@@ -18,12 +21,20 @@ Snip\TeX{} definuje příkaz \textbackslash{}IncludeCode, který se používá n
 
 \IncludeCode[firstnumber=1]{docs/example2.py}{comm1}{cpp}{}
 
-Nepovinný argument \textit{options} umožňuje uživateli přepsat nastavení formátovaní kódu 
-(o tom více v kapitole Technická dokumentace). Povinný argument \textit{source} definuje zdroj, odkud se má
+Nepovinný argument \textit{options} umožňuje uživateli přepsat nastavení formátovaní kódu. 
+V příkazu níže byly použity přepínače \textit{firstnumber}, \textit{fontsize} a \textit{style},
+které nastaví číslovaní řádků od čísla 1, velikost fontu na \textit{\textbackslash{}scriptsize}
+a styl zvýrazňování kódu na \textit{monokai}. 
+Přepínače musí existovat v Minted ADD REF a být oddělené čárkou. Dobré je také zmínit, že bez úpravy
+přepínače \textit{firstnumber} Snip\TeX{} čísluje řádky tak, jak jsou číslované ve zdrojovém souboru.
+
+\IncludeCode[firstnumber=1]{docs/example2.py}{comm2}{cpp}{}
+
+Povinný argument \textit{source} definuje zdroj, odkud se má
 úrvek kódu převzít. Argument může být ve formě cesty k lokálnímu souboru, nebo odkazu na webovou stránku.
 Snip\TeX{} dokáže tyto možnosti sám rozlišit. Povinný argument \textit{tag} specifikuje 
 unikátní klíčové slovo, které označuje jeden úryvek kódu. Tag musí být oddělený přesně jednou mezerou a 
-následovat za frázemi sniptex-start and sniptex-end, které úryvek vymezují (Úryvek 1).
+následovat za frázemi sniptex-start and sniptex-end, které úryvek vymezují (viz Úryvek~1).
 
 \IncludeCode{docs/example.py}{demo}{Python}{Úryvek 1: Ukázka používání tagů.}
 
@@ -33,14 +44,28 @@ Nicméně složené závorky je potřeba psát i pro prázdný popisek.
 
 \subsubsection*{Lokální úryvek}
 
-\IncludeCode[firstnumber=1]{docs/example2.py}{comm2}{cpp}{}
-
-\IncludeCode{docs/example.py}{tag1}{Python}{Úryvek 2: Úryvek kódu z lokálního souboru.}
-
-\subsubsection*{Úryvek z webové stránky}
+Pro ukázku toho, jak příkaz \textbackslash{}IncludeCode funguje pro lokální soubory využijeme
+soubor \textit{example.py} s Úryvkem~1. V něm je funkce \textit{main()} obalená tagem \textit{tag1}, 
+příkaz pro zobrazení fuknce by tedy vypadal takto:
 
 \IncludeCode[firstnumber=1]{docs/example2.py}{comm3}{cpp}{}
 
-\IncludeCode[]{https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example2.py}{tag2}{Python}{Úryvek 2: Úryvek kódu z webové stránky.}
+Tento příkaz se přeloží na Úryvek 2:
+
+\IncludeCode{docs/example.py}{tag1}{Python}{Úryvek 2: Úryvek vymezený tagem \textit{tag1} z Úryvku 1.}
+
+\newpage
+
+\subsubsection*{Úryvek z webové stránky}
+
+Součástí domovského repozitáře Snip\TeX{}u na GitHubu je i soubour \textit{example2.py}, 
+ve kterém se nachází funkce pro extrakci úryvku. Část této funkce je ohraničená tagem \textit{tag2}, 
+kterou zobrazíme následujícím příkazem:
+
+\IncludeCode[firstnumber=1]{docs/example2.py}{comm4}{cpp}{}
+
+Výsledkem tohoto příkazu je Úryvek 3:
+
+\IncludeCode[]{https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example2.py}{tag2}{Python}{Úryvek 3: Úryvek kódu z webové stránky.}
 
 \end{document}
