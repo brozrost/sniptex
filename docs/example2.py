@@ -4,12 +4,16 @@ sniptex-start comm1
 sniptex-end comm1
 
 sniptex-start comm2
-\IncludeCode{example.py}{tag1}{Python}{Úryvek 2: ...}
+\IncludeCode[firstnumber=1, fontsize=\scriptsize, style=monokai] {source}{tag}{language}{caption}
 sniptex-end comm2
 
 sniptex-start comm3
-\IncludeCode{raw.githubusercontent.com/brozrost /sniptex/main/docs/example2.py}{tag2}{Python}{Úryvek 3: ...}
+\IncludeCode{example.py}{tag1}{Python}{Úryvek 2: ...}
 sniptex-end comm3
+
+sniptex-start comm4
+\IncludeCode{raw.githubusercontent.com/brozrost /sniptex/main/docs/example2.py}{tag2}{Python}{Úryvek 3: ...}
+sniptex-end comm4
 """
 
 import re
