@@ -28,7 +28,7 @@ def test_extract_tagged_block():
     assert snippet == OUT
 
 def test_extract_from_file():
-    snippet, first_line_num, last_line_num = extractor.extract_from_file(PATH, "demo")
+    snippet, first_line_num, last_line_num = extractor.extract_from_file(PATH, "tag1")
     assert snippet == OUT
 
 def test_missing_start_tag():
