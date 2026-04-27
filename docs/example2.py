@@ -1,7 +1,15 @@
 """
-sniptex-start comm
-\IncludeCode{docs/example.py}{demo}{Python}{Snippet 1: Local code snippet}
-sniptex-end comm
+sniptex-start comm1
+\IncludeCode[options]{source}{tag}{language}{caption}
+sniptex-end comm1
+
+sniptex-start comm2
+\IncludeCode{docs/example.py}{tag1}{Python}{Snippet 1: ...}
+sniptex-end comm2
+
+sniptex-start comm3
+\IncludeCode{raw.githubusercontent.com/...}{tag2}{Python}{Snippet 2: ...}
+sniptex-end comm3
 """
 
 class SniptexError(RuntimeError):
@@ -16,7 +24,7 @@ def extract_tagged_block(text: str, tag: str):
     start_index = None
     end_index = None
 
-    # sniptex-start 1
+    # sniptex-start tag2
     for i, line in enumerate(lines):
         if start_marker in line:
             if start_index is not None:
@@ -26,7 +34,7 @@ def extract_tagged_block(text: str, tag: str):
 
     if start_index is None:
         raise SniptexError(f"Start tag not found for '{tag}'")
-    # sniptex-end 1
+    # sniptex-end tag2
     
     for i in range(start_index + 1, len(lines)):
         if end_marker in lines[i]:
