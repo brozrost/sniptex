@@ -1,8 +1,18 @@
-% lualatex --shell-escape docs/main.tex 
+% Pro kompilaci bude asi potreba spustit nasledujici serii prikazu,
+% bez nich se citace v dokumentu nejspis nebudou ukazovat spravne.
+
+\iffalse
+lualatex --shell-escape docs/main.tex
+bibtex main
+lualatex --shell-escape docs/main.tex
+lualatex --shell-escape docs/main.tex
+\fi
 
 \documentclass{article}
 
 \usepackage[a4paper,margin=2cm]{geometry}
+\usepackage[czech]{babel}
+\usepackage{natbib}
 
 \usepackage{sniptex}
 
@@ -25,7 +35,7 @@ Nepovinný argument \textit{options} umožňuje uživateli přepsat nastavení f
 V příkazu níže byly použity přepínače \textit{firstnumber}, \textit{fontsize} a \textit{style},
 které nastaví číslovaní řádků od čísla 1, velikost fontu na \textit{\textbackslash{}scriptsize}
 a styl zvýrazňování kódu na \textit{monokai}. 
-Přepínače musí existovat v Minted ADD REF a být oddělené čárkou. Dobré je také zmínit, že bez úpravy
+Přepínače musí existovat v balíčku Minted \citep{minted} a být oddělené čárkou. Dobré je také zmínit, že bez úpravy
 přepínače \textit{firstnumber} Snip\TeX{} čísluje řádky tak, jak jsou číslované ve zdrojovém souboru.
 
 \IncludeCode[firstnumber=1]{docs/example2.py}{comm2}{cpp}{}
@@ -67,5 +77,8 @@ kterou zobrazíme následujícím příkazem:
 Výsledkem tohoto příkazu je Úryvek 3:
 
 \IncludeCode[]{https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example2.py}{tag2}{Python}{Úryvek 3: Úryvek kódu z webové stránky.}
+
+\bibliographystyle{unsrt}
+\bibliography{docs/citations.bib}
 
 \end{document}
