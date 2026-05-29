@@ -1,4 +1,8 @@
 """
+sniptex-start comm0
+pip install sniptex
+sniptex-end comm0
+
 sniptex-start comm1
 \IncludeCode[options]{source}{tag}{language}{caption}
 sniptex-end comm1
