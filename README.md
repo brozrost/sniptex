@@ -133,6 +133,6 @@ lualatex --shell-escape docs/main.tex
 
 ## Security note
 
-SnipTeX requires shell escape because it calls an external Python backend during compilation (lines 80, 93, and 94 in `sniptex.sty`).
+SnipTeX requires shell escape because it calls an external Python backend during compilation and removes temporary files (lines 80, 93, and 94 in `sniptex.sty`).
 
 Only compile trusted documents with shell escape enabled.
