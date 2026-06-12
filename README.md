@@ -17,11 +17,42 @@
 
 ## Installation
 
+SnipTeX consists of two parts:
+
+1. LaTeX package `sniptex.sty`,
+2. Python backend package `sniptex`.
+
+Both parts are required.
+
+### Installing the LaTeX package
+
+If SnipTeX is available in your TeX distribution, install it through your TeX package manager.
+
+For TeX Live, use:
+
+~~~sh
+tlmgr install sniptex
+~~~
+
+For MiKTeX, install the package `sniptex` using the MiKTeX Console or the MiKTeX package manager.
+
+Alternatively, install the package manually from CTAN by downloading the SnipTeX archive and placing `sniptex.sty` next to your main `.tex` file or inside your local TeX tree.
+
+### Installing the Python backend
+
 SnipTeX uses a Python backend with the same name to parse source files. The backend is published on PyPI. Before using the LaTeX package, install the backend:
 
 ```sh
 pip install sniptex
 ```
+
+Also see: https://pypi.org/project/sniptex/
+
+After installation, the backend must be available in the system `PATH` under the command name `sniptex`. You can check this with:
+
+~~~sh
+sniptex --help
+~~~
 
 ## Usage
 
