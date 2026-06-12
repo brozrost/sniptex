@@ -24,19 +24,19 @@ SnipTeX consists of two parts:
 
 Both parts are required.
 
-### Installing the LaTeX package
+### Installing the LaTeX package from CTAN
 
-If SnipTeX is available in your TeX distribution, install it through your TeX package manager.
+Download the <a href="">SnipTeX package archive from CTAN</a> and extract it. For a local project installation, copy `sniptex.sty` next to your main `.tex` file:
 
-For TeX Live, use:
+```sh
+project/
+├── main.tex
+└── sniptex.sty
+```
 
-~~~sh
-tlmgr install sniptex
-~~~
+This is the simplest installation method and is sufficient for compiling a single project. For a user-wide installation, place `sniptex.sty` into your local TeX tree.
 
-For MiKTeX, install the package `sniptex` using the MiKTeX Console or the MiKTeX package manager.
-
-Alternatively, install the package manually from CTAN by downloading the SnipTeX archive and placing `sniptex.sty` next to your main `.tex` file or inside your local TeX tree.
+Also see: ctan url
 
 ### Installing the Python backend
 
