@@ -15,7 +15,10 @@
   </a>
 </div>
 
-**Czech docs and example document:** <a href="https://github.com/brozrost/sniptex/blob/main/docs/main.pdf">main.pdf</a>
+**Documentation:** <a href="https://github.com/brozrost/sniptex/blob/main/docs/docs.pdf">docs.pdf</a>  
+**Czech documentation:** <a href="https://github.com/brozrost/sniptex/blob/main/docs/docs-czech.pdf">docs-czech.pdf</a>
+
+> The documentation files also double as example documents for SnipTeX.
 
 ## Installation
 
@@ -64,7 +67,7 @@ lualatex --shell-escape docs/main.tex
 
 ## Usage
 
-**Example document:** <a href="https://github.com/brozrost/sniptex/blob/main/docs/main.pdf">main.pdf</a>
+**Example document:** <a href="https://github.com/brozrost/sniptex/blob/main/docs/docs.pdf">docs.pdf</a>
 
 SnipTeX defines the command `\IncludeCode`, which is used as follows:
 
