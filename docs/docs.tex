@@ -30,6 +30,7 @@ lualatex --shell-escape docs/docs.tex
 
 \begin{document}
 
+\hypersetup{pageanchor=false}
 \begin{titlepage}
     \centering
 
@@ -53,6 +54,10 @@ lualatex --shell-escape docs/docs.tex
 
     \vspace{2cm}
 \end{titlepage}
+
+\hypersetup{pageanchor=true}
+\clearpage
+\pagenumbering{arabic}
 
 \section*{Snip\TeX}
 

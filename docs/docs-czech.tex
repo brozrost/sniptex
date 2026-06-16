@@ -25,16 +25,12 @@ lualatex --shell-escape docs/docs-czech.tex
 \usepackage[czech]{babel}
 \usepackage{natbib}
 \usepackage[hidelinks]{hyperref}
-\usepackage{fontspec}
-
-\setmainfont{Latin Modern Roman}
-\setsansfont{Latin Modern Sans}
-\setmonofont{Latin Modern Mono}
 
 \usepackage{sniptex}
 
 \begin{document}
 
+\hypersetup{pageanchor=false}
 \begin{titlepage}
     \centering
 
@@ -58,6 +54,10 @@ lualatex --shell-escape docs/docs-czech.tex
 
     \vspace{2cm}
 \end{titlepage}
+
+\hypersetup{pageanchor=true}
+\clearpage
+\pagenumbering{arabic}
 
 \section*{Snip\TeX}
 
