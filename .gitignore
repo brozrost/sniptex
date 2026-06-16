@@ -212,3 +212,4 @@ _minted/
 *.pdf
 *.bbl 
 *.blg
+*.out
