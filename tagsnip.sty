@@ -1,0 +1,92 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tagsnip}[2026/04/24 tagsnip - Package for including tagged code snippets.]
+
+\RequirePackage{iftex}
+\RequirePackage{xcolor}
+\RequirePackage{minted}
+\RequirePackage{tcolorbox}
+
+\ifLuaTeX
+\else
+  \PackageError{tagsnip}{tagsnip requires LuaLaTeX}{Use lualatex instead}
+\fi
+
+\usemintedstyle{github-dark}
+
+\definecolor{tagsnipbg}{HTML}{161B22}
+\definecolor{tagsnipline}{HTML}{6E7681}
+
+\renewcommand{\theFancyVerbLine}{
+    \scriptsize\textcolor{tagsnipline}{\arabic{FancyVerbLine}}
+}
+
+\def\tagsnipfirstline{1}
+\def\tagsniplastline{1}
+
+\newread\tagsniplinefile
+
+\newlength{\tagsnipnumberwidth}
+\newlength{\tagsnipleftpadding}
+\newlength{\tagsnipboxwidth}
+\setlength{\tagsnipboxwidth}{0.9\linewidth}
+
+\newcommand{\tagsnipbox}[4]{
+    \begin{center}
+        \begin{tcolorbox}[
+            colback=tagsnipbg,
+            colframe=tagsnipbg,
+            boxrule=0pt,
+            arc=3mm,
+            left=\tagsnipleftpadding,
+            right=3mm,
+            top=2mm,
+            bottom=2mm,
+            boxsep=0pt,
+            width=\tagsnipboxwidth,
+        ]
+        \inputminted[
+            linenos,
+            firstnumber=\number\numexpr\tagsnipfirstline\relax,
+            numbersep=10pt,
+            fontsize=\scriptsize,
+            baselinestretch=1.15,
+            breaklines,
+            tabsize=4,
+            breaksymbolleft={},
+            breaksymbolright={},
+            breakindent=1.5em,
+            breakautoindent=true,
+            #3
+        ]{#2}{#1}
+        \end{tcolorbox}
+
+        \if\relax\detokenize{#4}\relax
+        \else
+            {\footnotesize{#4}\par}
+        \fi
+    \end{center}
+}
+
+\newcounter{tagsnipsnippet}
+
+\newcommand{\IncludeCode}[5][]{
+    \stepcounter{tagsnipsnippet}
+
+    \edef\tagsnipoutfile{tagsnip-\arabic{tagsnipsnippet}.tmp}
+
+    \immediate\write18{tagsnip -s "#2" -t "#3" -o "\tagsnipoutfile"}
+
+    \openin\tagsniplinefile=\tagsnipoutfile.meta
+    \read\tagsniplinefile to \tagsnipfirstline
+    \read\tagsniplinefile to \tagsniplastline
+    \closein\tagsniplinefile
+    
+    \settowidth{\tagsnipnumberwidth}{\scriptsize\texttt{\tagsniplastline}}
+    \setlength{\tagsnipleftpadding}{\tagsnipnumberwidth}
+    \addtolength{\tagsnipleftpadding}{20pt}
+
+    \tagsnipbox{\tagsnipoutfile}{#4}{#1}{#5}
+
+    \immediate\write18{rm -f "\tagsnipoutfile"}
+    \immediate\write18{rm -f "\tagsnipoutfile.meta"}
+}
