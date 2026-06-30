@@ -87,6 +87,5 @@
 
     \tagsnipbox{\tagsnipoutfile}{#4}{#1}{#5}
 
-    \immediate\write18{rm -f "\tagsnipoutfile"}
-    \immediate\write18{rm -f "\tagsnipoutfile.meta"}
+    \immediate\write18{tagsnip -c "\tagsnipoutfile"}
 }
