@@ -1,12 +1,12 @@
-% SnipTeX sample document
+% tagsnip sample document
 % Author: Rostislav Brož
 % Semester project, 2026
 
-% SnipTeX needs a Python backend in order to work. 
+% tagsnip needs a Python backend in order to work. 
 % Before compiling the document, it has to be installed:
 
 \iffalse
-pip install sniptex
+pip install tagsnip
 \fi
 
 % To compile the document, the following sequence of commands should be run. 
@@ -26,7 +26,7 @@ lualatex --shell-escape docs/docs.tex
 \usepackage{natbib}
 \usepackage[hidelinks]{hyperref}
 
-\usepackage{sniptex}
+\usepackage{tagsnip}
 
 \begin{document}
 
@@ -39,7 +39,7 @@ lualatex --shell-escape docs/docs.tex
 
     \vspace{3cm}
 
-    {\Huge\bfseries Snip\TeX\par}
+    {\Huge\bfseries tagsnip\par}
 
     \vspace{0.5cm}
 
@@ -59,24 +59,24 @@ lualatex --shell-escape docs/docs.tex
 \clearpage
 \pagenumbering{arabic}
 
-\section*{Snip\TeX}
+\section*{tagsnip}
 
-Snip\TeX{} is a La\TeX{} package for including tagged code snippets from local files or remote URLs. 
+\textit{tagsnip} is a La\TeX{} package for including tagged code snippets from local files or remote URLs. 
 It extracts marked sections of code and typesets them in a consistent style, 
 supporting reproducible and maintainable documentation.
 
 \subsection*{Installation}
 
-For parsing source files, Snip\TeX{} uses a Python package of the same name, 
+For parsing source files, \textit{tagsnip} uses a Python package of the same name, 
 which is published in the PyPI software repository \citep{pypi}. 
-In order for Snip\TeX{} to work, 
+In order for \textit{tagsnip} to work, 
 the backend has to be installed using the following command.
 
 \IncludeCode[firstnumber=1]{docs/example2.py}{comm0}{cpp}{}
 
 \subsection*{Usage}
 
-Snip\TeX{} defines the command \textbackslash{}IncludeCode, which is used as follows:
+\textit{tagsnip} defines the command \textbackslash{}IncludeCode, which is used as follows:
 
 \IncludeCode[firstnumber=1]{docs/example2.py}{comm1}{cpp}{}
 
@@ -86,15 +86,15 @@ They set line numbering to start from number 1, the font size to \nobreak\textit
 and the syntax highlighting style to \textit{monokai}. 
 The options must exist in the Minted package \citep{minted} and must be separated by commas. 
 It is also important to mention that, without changing the \textit{firstnumber} option, 
-Snip\TeX{} numbers lines according to their original numbering in the source file.
+\textit{tagsnip} numbers lines according to their original numbering in the source file.
 
 \IncludeCode[firstnumber=1]{docs/example2.py}{comm2}{cpp}{}
 
 The mandatory argument \textit{source} defines the source from which the code snippet should be taken. 
 The argument can be either a path to a local file or a link to a web page. 
-Snip\TeX{} can distinguish these possibilities automatically. 
+\textit{tagsnip} can distinguish these possibilities automatically. 
 The mandatory argument \textit{tag} specifies a unique keyword that identifies one code snippet. 
-The tag must be separated by exactly one space and must follow the phrases \textit{sniptex-start} and \textit{sniptex-end}, 
+The tag must be separated by exactly one space and must follow the phrases \textit{tagsnip-start} and \textit{tagsnip-end}, 
 which delimit the snippet (see Snippet~1).
 
 \IncludeCode{docs/example.py}{demo}{Python}{Snippet 1: Example of tag usage.}
@@ -119,9 +119,9 @@ This command produces Snippet 2:
 
 \newpage
 
-\subsubsection*{Snippet from a web page}
+\subsubsection*{Snippet from a remote URL}
 
-The home repository of Snip\TeX{} on GitHub also contains the file \textit{example2.py}, 
+The home repository of \textit{tagsnip} on GitHub also contains the file \textit{example2.py}, 
 which includes a function for extracting a snippet. 
 Part of this function is enclosed by the tag \textit{tag2}. 
 We display it using the following command:
@@ -130,11 +130,11 @@ We display it using the following command:
 
 The result of this command is Snippet 3:
 
-\IncludeCode[]{https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example2.py}{tag2}{Python}{Snippet 3: Code snippet from a web page.}
+\IncludeCode[]{https://raw.githubusercontent.com/brozrost/tagsnip/main/docs/example2.py}{tag2}{Python}{Snippet 3: Code snippet from a remote URL.}
 
 \subsection*{Architecture}
 
-Snip\TeX{} consists of two main parts: a La\TeX{} frontend package and an external backend utility written in Python. 
+\textit{tagsnip} consists of two main parts: a La\TeX{} frontend package and an external backend utility written in Python. 
 The frontend defines the command \textbackslash{}IncludeCode and handles the typesetting of the resulting snippets 
 using the Minted package. The backend is responsible for accessing source files, finding marked sections, 
 and extracting them into temporary files. During document compilation, the frontend uses shell escape 
@@ -143,9 +143,9 @@ and then inserts the generated temporary file into the document.
 
 \subsection*{Backend}
 
-The Python package \textit{sniptex} is a simple command-line interface that accepts a source file, 
+The Python package \textit{tagsnip} is a simple command-line interface that accepts a source file, 
 a tag name, and a path to an output file. The interface loads the source file, 
-finds the corresponding pair of \textit{sniptex-start} and \textit{sniptex-end} markers, 
+finds the corresponding pair of \textit{tagsnip-start} and \textit{tagsnip-end} markers, 
 and then extracts the text between them.
 
 The package also checks error states. An error state means, for example, a non-existent source file, 
@@ -157,13 +157,13 @@ and for loading remote files over HTTP, it uses the \textit{requests} library.
 \subsection*{Limitations}
 
 \begin{itemize}
-    \item Snip\TeX{} requires the LuaLa\TeX{} compiler.
+    \item \textit{tagsnip} requires the LuaLa\TeX{} compiler.
     
     \item During document compilation, 
     shell escape must be enabled using the \textit{--shell-escape} option.
 
     \item The Python backend must be installed and available in the system PATH 
-    under the command \textit{sniptex}.
+    under the command \textit{tagsnip}.
 
     \item The package depends on the Minted package.
 

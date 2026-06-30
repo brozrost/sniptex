@@ -1,22 +1,22 @@
-% SnipTeX ukázkový dokument
+% tagsnip ukázkový dokument
 % Autor: Rostislav Brož
 % Semestrální práce, 2026
 
-% SnipTeX potřebuje Python backend pro to, aby fungoval.
+% tagsnip potřebuje Python backend pro to, aby fungoval.
 % Před kompilací dokumentu je potřeba ho nainstalovat:
 
 \iffalse
-pip install sniptex
+pip install tagsnip
 \fi
 
 % Pro kompilaci bude potřeba spustit nasledující sérii příkazů,
 % bez nich se citace v dokumentu nejspíš nebudou ukazovat správně.
 
 \iffalse
-lualatex --shell-escape docs/docs-czech.tex
-bibtex main
-lualatex --shell-escape docs/docs-czech.tex
-lualatex --shell-escape docs/docs-czech.tex
+lualatex --shell-escape docs/tagsnip-docs-czech.tex
+bibtex tagsnip-docs-czech
+lualatex --shell-escape docs/tagsnip-docs-czech.tex
+lualatex --shell-escape docs/tagsnip-docs-czech.tex
 \fi
 
 \documentclass{article}
@@ -26,7 +26,7 @@ lualatex --shell-escape docs/docs-czech.tex
 \usepackage{natbib}
 \usepackage[hidelinks]{hyperref}
 
-\usepackage{sniptex}
+\usepackage{tagsnip}
 
 \begin{document}
 
@@ -39,7 +39,7 @@ lualatex --shell-escape docs/docs-czech.tex
 
     \vspace{3cm}
 
-    {\Huge\bfseries Snip\TeX\par}
+    {\Huge\bfseries tagsnip\par}
 
     \vspace{0.5cm}
 
@@ -59,24 +59,24 @@ lualatex --shell-escape docs/docs-czech.tex
 \clearpage
 \pagenumbering{arabic}
 
-\section*{Snip\TeX}
+\section*{tagsnip}
 
-Snip\TeX{} je La\TeX{}ový balíček pro vkládání označených úryvků kódu z lokálních souborů 
+\textit{tagsnip} je La\TeX{}ový balíček pro vkládání označených úryvků kódu z lokálních souborů 
 nebo vzdálených repozitářů dostupných přes webové odkazy. 
 Extrahuje označené části kódu a sází je jednotným stylem, 
 čímž podporuje reprodukovatelnou a udržitelnou dokumentaci.
 
 \subsection*{Instalace}
 
-Snip\TeX{} pro parsování zdrojových souborů používá stejnojmenný Python balíček,
+\textit{tagsnip} pro parsování zdrojových souborů používá stejnojmenný Python balíček,
 který je publikovaný v softwarovém repozitáři PyPI \citep{pypi}. 
-Aby Snip\TeX{} fungoval, je potřeba backend nainstalovat následujícím příkazem.
+Aby \textit{tagsnip} fungoval, je potřeba backend nainstalovat následujícím příkazem.
 
 \IncludeCode[firstnumber=1]{docs/example2.py}{comm0}{cpp}{}
 
 \subsection*{Použití}
 
-Snip\TeX{} definuje příkaz \textbackslash{}IncludeCode, který se používá následovně:
+\textit{tagsnip} definuje příkaz \textbackslash{}IncludeCode, který se používá následovně:
 
 \IncludeCode[firstnumber=1]{docs/example2.py}{comm1}{cpp}{}
 
@@ -85,15 +85,15 @@ V příkazu níže byly použity přepínače \textit{firstnumber}, \textit{font
 které nastaví číslování řádků od čísla 1, velikost fontu na \nobreak\textit{\textbackslash{}scriptsize}
 a styl zvýrazňování kódu na \textit{monokai}. 
 Přepínače musí existovat v balíčku Minted \citep{minted} a být oddělené čárkou. Je také důležité zmínit, že bez úpravy
-přepínače \textit{firstnumber} Snip\TeX{} čísluje řádky tak, jak jsou číslované ve~zdrojovém souboru.
+přepínače \textit{firstnumber} \textit{tagsnip} čísluje řádky tak, jak jsou číslované ve~zdrojovém souboru.
 
 \IncludeCode[firstnumber=1]{docs/example2.py}{comm2}{cpp}{}
 
 Povinný argument \textit{source} definuje zdroj, odkud se má
 úrvek kódu převzít. Argument může být ve formě cesty k lokálnímu souboru, nebo odkazu na webovou stránku.
-Snip\TeX{} dokáže tyto možnosti sám rozlišit. Povinný argument \textit{tag} specifikuje 
+\textit{tagsnip} dokáže tyto možnosti sám rozlišit. Povinný argument \textit{tag} specifikuje 
 unikátní klíčové slovo, které označuje jeden úryvek kódu. Tag musí být oddělený přesně jednou mezerou a 
-následovat za frázemi \textit{sniptex-start} a \textit{sniptex-end}, 
+následovat za frázemi \textit{tagsnip-start} a \textit{tagsnip-end}, 
 které úryvek vymezují (viz Úryvek~1).
 
 \IncludeCode{docs/example.py}{demo}{Python}{Úryvek 1: Ukázka používání tagů.}
@@ -118,7 +118,7 @@ Tento příkaz se přeloží na Úryvek 2:
 
 \subsubsection*{Úryvek z webové stránky}
 
-Součástí domovského repozitáře Snip\TeX{}u na GitHubu je i soubor \textit{example2.py}, 
+Součástí domovského repozitáře \textit{tagsnipu} na GitHubu je i soubor \textit{example2.py}, 
 ve kterém se nachází funkce pro extrakci úryvku. Část této funkce je ohraničená tagem \textit{tag2}, 
 tu zobrazíme následujícím příkazem:
 
@@ -126,11 +126,11 @@ tu zobrazíme následujícím příkazem:
 
 Výsledkem tohoto příkazu je Úryvek 3:
 
-\IncludeCode[]{https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example2.py}{tag2}{Python}{Úryvek 3: Úryvek kódu z webové stránky.}
+\IncludeCode[]{https://raw.githubusercontent.com/brozrost/tagsnip/main/docs/example2.py}{tag2}{Python}{Úryvek 3: Úryvek kódu z webové stránky.}
 
 \subsection*{Architektura}
 
-Snip\TeX{} se skládá ze dvou hlavních částí,
+\textit{tagsnip} se skládá ze dvou hlavních částí,
 La\TeX{}ového frontend balíčku a externí backend utility napsané v~Pythonu.
 Frontend definuje příkaz \textbackslash{}IncludeCode a zajišťuje sazbu výsledných úryvků pomocí balíčku Minted.
 Backend je zodpovědný za přístup ke zdrojovým souborům, vyhledávání označených úseků a jejich extrakci do dočasných souborů.
@@ -140,10 +140,10 @@ a následně vloží vygenerovaný dočasný soubor do dokumentu.
 
 \subsection*{Backend}
 
-Python balíček \textit{sniptex} je jednoduché command line rozhraní,
+Python balíček \textit{tagsnip} je jednoduché command line rozhraní,
 které přijímá zdrojový soubor, název tagu a~cestu k výstupnímu souboru. 
 Rozhraní načte zdrojový soubor, vyhledá odpovídající dvojici značek
-\textit{sniptex-start} a~\textit{sniptex-end} a následně extrahuje text mezi nimi.
+\textit{tagsnip-start} a~\textit{tagsnip-end} a následně extrahuje text mezi nimi.
 
 Balíček také provádí kontrolu chybových stavů. Chybovým stavem je myšlen například
 neexistující zdrojový soubor, chybějící tag nebo vícenásobný výskyt stejného tagu ve zdrojovém souboru.
@@ -156,13 +156,13 @@ a pro načítání vzdálených souborů přes HTTP knihovnu \textit{requests}.
 \subsection*{Omezení}
 
 \begin{itemize}
-    \item Snip\TeX{} vyžaduje překladač LuaLa\TeX{}.
+    \item \textit{tagsnip} vyžaduje překladač LuaLa\TeX{}.
     
     \item Při kompilaci dokumentu musí být povolen shell escape
     pomocí přepínače \textit{--shell-escape}.
 
     \item Python backend musí být nainstalovaný a dostupný v systémové proměnné PATH
-    pod příkazem \textit{sniptex}.
+    pod příkazem \textit{tagsnip}.
 
     \item Balíček závisí na balíčku Minted.
 

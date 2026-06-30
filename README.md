@@ -1,75 +1,75 @@
-### SnipTeX is a LaTeX package for including tagged code snippets from local files or remote URLs. It extracts marked sections of code and typesets them in a consistent style, supporting reproducible and maintainable documentation.
+### `tagsnip` is a LaTeX package for including tagged code snippets from local files or remote URLs. It extracts marked sections of code and typesets them in a consistent style, supporting reproducible and maintainable documentation.
 
 <div align="center">
-  <a href="https://github.com/brozrost/sniptex/actions">
-    <img src="https://github.com/brozrost/sniptex/actions/workflows/python-package.yml/badge.svg">
+  <a href="https://github.com/brozrost/tagsnip/actions">
+    <img src="https://github.com/brozrost/tagsnip/actions/workflows/python-package.yml/badge.svg">
   </a>
-  <a href="https://github.com/brozrost/sniptex/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/brozrost/sniptex">
+  <a href="https://github.com/brozrost/tagsnip/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/brozrost/tagsnip">
   </a>
-  <a href="https://github.com/brozrost/sniptex/issues">
-    <img src="https://img.shields.io/github/issues/brozrost/sniptex">
+  <a href="https://github.com/brozrost/tagsnip/issues">
+    <img src="https://img.shields.io/github/issues/brozrost/tagsnip">
   </a>
-  <a href="https://github.com/brozrost/sniptex/pulls">
-    <img src="https://img.shields.io/github/issues-pr/brozrost/sniptex">
+  <a href="https://github.com/brozrost/tagsnip/pulls">
+    <img src="https://img.shields.io/github/issues-pr/brozrost/tagsnip">
   </a>
 </div>
 
-**Documentation:** <a href="https://github.com/brozrost/sniptex/blob/main/docs/docs.pdf">docs.pdf</a>  
-**Czech documentation:** <a href="https://github.com/brozrost/sniptex/blob/main/docs/docs-czech.pdf">docs-czech.pdf</a>
+**Documentation:** <a href="https://github.com/brozrost/tagsnip/blob/main/docs/tagsnip-docs.pdf">tagsnip-docs.pdf</a>  
+**Czech documentation:** <a href="https://github.com/brozrost/tagsnip/blob/main/docs/tagsnip-docs-czech.pdf">tagsnip-docs-czech.pdf</a>
 
-> The documentation files also double as example documents for SnipTeX.
+> The documentation files also double as example documents for `tagsnip`.
 
 ## Installation
 
-SnipTeX consists of two parts:
+`tagsnip` consists of two parts:
 
-1. LaTeX package `sniptex.sty`,
-2. Python backend package `sniptex`.
+1. LaTeX package `tagsnip.sty`,
+2. Python backend package `tagsnip`.
 
 Both parts are required.
 
 ### Installing the LaTeX package from CTAN
 
-Download the <a href="">SnipTeX package archive from CTAN</a> and extract it. For a local project installation, copy `sniptex.sty` next to your main `.tex` file:
+Download the <a href="">`tagsnip` package archive from CTAN</a> and extract it. For a local project installation, copy `tagsnip.sty` next to your main `.tex` file:
 
 ```sh
 project/
 ├── main.tex
-└── sniptex.sty
+└── tagsnip.sty
 ```
 
-This is the simplest installation method and is sufficient for compiling a single project. For a user-wide installation, place `sniptex.sty` into your local TeX tree.
+This is the simplest installation method and is sufficient for compiling a single project. For a user-wide installation, place `tagsnip.sty` into your local TeX tree.
 
 Also see: ctan url
 
 ### Installing the Python backend
 
-SnipTeX uses a Python backend with the same name to parse source files. The backend is published on PyPI. Before using the LaTeX package, install the backend:
+`tagsnip` uses a Python backend with the same name to parse source files. The backend is published on PyPI. Before using the LaTeX package, install the backend:
 
 ```sh
-pip install sniptex
+pip install tagsnip
 ```
 
-Also see: https://pypi.org/project/sniptex/
+Also see: https://pypi.org/project/tagsnip/
 
-After installation, the backend must be available in the system `PATH` under the command name `sniptex`. You can check this with:
+After installation, the backend must be available in the system `PATH` under the command name `tagsnip`. You can check this with:
 
 ~~~sh
-sniptex --help
+tagsnip --help
 ~~~
 
 ## Compilation
 
 ```sh
-lualatex --shell-escape docs/main.tex
+lualatex --shell-escape docs/tagsnip-docs.tex
 ```
 
 ## Usage
 
-**Example document:** <a href="https://github.com/brozrost/sniptex/blob/main/docs/docs.pdf">docs.pdf</a>
+**Example document:** <a href="https://github.com/brozrost/tagsnip/blob/main/docs/docs.pdf">docs.pdf</a>
 
-SnipTeX defines the command `\IncludeCode`, which is used as follows:
+`tagsnip` defines the command `\IncludeCode`, which is used as follows:
 
 ```tex
 \IncludeCode[options]{source}{tag}{language}{caption}
@@ -87,21 +87,21 @@ The optional argument `options` allows the user to override code formatting sett
 
 The option `firstnumber=1` starts line numbering at line 1, `fontsize=\scriptsize` changes the font size, and `style=monokai` changes the syntax highlighting style.
 
-Without changing `firstnumber`, SnipTeX preserves the original line numbers from the source file.
+Without changing `firstnumber`, `tagsnip` preserves the original line numbers from the source file.
 
-The mandatory argument `source` defines where the code should be loaded from. It can be either a local file path or a URL pointing to a remote text file. SnipTeX distinguishes these cases automatically.
+The mandatory argument `source` defines where the code should be loaded from. It can be either a local file path or a URL pointing to a remote text file. `tagsnip` distinguishes these cases automatically.
 
-The mandatory argument `tag` specifies the unique keyword identifying the requested snippet. A snippet is delimited in the source file by `sniptex-start` and `sniptex-end` markers:
+The mandatory argument `tag` specifies the unique keyword identifying the requested snippet. A snippet is delimited in the source file by `tagsnip-start` and `tagsnip-end` markers:
 
 ```python
-# sniptex-start tag1
+# tagsnip-start tag1
 def main():
     x = 1
     y = 2
     print(x + y)
 
     return 0
-# sniptex-end tag1
+# tagsnip-end tag1
 ```
 
 The tag must follow the marker after exactly one space.
@@ -118,18 +118,18 @@ Suppose the local file `docs/example.py` contains a function `main()` marked wit
 \IncludeCode{example.py}{tag1}{Python}{Úryvek 2: ...}
 ```
 <div align="center">
-  <img width="835" height="265" alt="# sniptex-start tagt" src="https://github.com/user-attachments/assets/4ca1bd1a-abe8-4478-963d-15c42fbe9479" />
+  <img width="835" height="265" alt="# tagsnip-start tag" src="https://github.com/user-attachments/assets/4ca1bd1a-abe8-4478-963d-15c42fbe9479" />
 </div>
 
 
 ## Remote snippet
 
-SnipTeX can also include snippets from source files available through web URLs.
+`tagsnip` can also include snippets from source files available through web URLs.
 
 For example, a snippet marked with the tag `tag2` in a remote Python file can be included as follows:
 
 ```tex
-\IncludeCode[firstnumber=1]{https://raw.githubusercontent.com/brozrost/sniptex/main/docs/example2.py}{tag2}{Python}{Code snippet from a remote file.}
+\IncludeCode[firstnumber=1]{https://raw.githubusercontent.com/brozrost/tagsnip/main/docs/example2.py}{tag2}{Python}{Code snippet from a remote file.}
 ```
 
 <div align="center">
@@ -140,7 +140,7 @@ The remote file must be accessible over HTTP or HTTPS and must be readable as a 
 
 ## Architecture
 
-SnipTeX consists of two main parts: a LaTeX frontend package and an external backend utility written in Python.
+`tagsnip` consists of two main parts: a LaTeX frontend package and an external backend utility written in Python.
 
 The frontend defines the command `\IncludeCode` and handles the final typesetting of extracted snippets through the `minted` package.
 
@@ -150,9 +150,9 @@ During document compilation, the frontend uses shell escape to call the backend 
 
 ## Backend
 
-The Python package `sniptex` provides a command-line interface that accepts a source file, a tag name, and an output file path.
+The Python package `tagsnip` provides a command-line interface that accepts a source file, a tag name, and an output file path.
 
-The backend loads the source file, searches for the corresponding pair of `sniptex-start` and `sniptex-end` markers, and extracts the text between them.
+The backend loads the source file, searches for the corresponding pair of `tagsnip-start` and `tagsnip-end` markers, and extracts the text between them.
 
 The package also checks for error states, such as:
 
@@ -168,20 +168,20 @@ For local files, the backend uses Python's `pathlib` module. For tag matching, i
 
 ## Limitations
 
-- SnipTeX requires LuaLaTeX.
+- `tagsnip` requires LuaLaTeX.
 - The document must be compiled with shell escape enabled, for example with `--shell-escape`.
-- The Python backend must be installed and available in the system `PATH` under the command `sniptex`.
-- SnipTeX depends on `minted`.
+- The Python backend must be installed and available in the system `PATH` under the command `tagsnip`.
+- `tagsnip` depends on `minted`.
 - Remote source files must be accessible over HTTP or HTTPS.
 - Remote source files must be plain text files.
 
 ## Security note
 
-SnipTeX requires shell escape because it calls an external Python backend during compilation and removes temporary files (lines 80, 93, and 94 in `sniptex.sty`).
+`tagsnip` requires shell escape because it calls an external Python backend during compilation and removes temporary files (lines 80, 93, and 94 in `tagsnip.sty`).
 
 Only compile trusted documents with shell escape enabled.
 
 ---
 Copyright (c) 2026 Rostislav Brož.
 
-> SnipTeX is distributed under the MIT License. The full license text is included in the repository in the [`LICENSE`](https://github.com/brozrost/sniptex/blob/main/LICENSE.md) file.
+> `tagsnip` is distributed under the MIT License. The full license text is included in the repository in the [`LICENSE`](https://github.com/brozrost/tagsnip/blob/main/LICENSE.md) file.
