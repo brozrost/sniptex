@@ -185,3 +185,16 @@ Only compile trusted documents with shell escape enabled.
 Copyright (c) 2026 Rostislav Brož.
 
 > `tagsnip` is distributed under the MIT License. The full license text is included in the repository in the [`LICENSE`](https://github.com/brozrost/tagsnip/blob/main/LICENSE.md) file.
+
+<!--
+python3 -m build
+twine check dist/*
+twine upload dist/*
+
+git archive --format=zip \                                                                               
+  --prefix=tagsnip/ \
+  -o tagsnip-1.0.1-ctan.zip \
+  HEAD
+
+unzip -l tagsnip-1.0.1-ctan.zip
+-->
