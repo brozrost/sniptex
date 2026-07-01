@@ -67,7 +67,7 @@ lualatex --shell-escape docs/tagsnip-docs.tex
 
 ## Usage
 
-**Example document:** <a href="https://github.com/brozrost/tagsnip/blob/main/docs/docs.pdf">docs.pdf</a>
+**Example document:** <a href="https://github.com/brozrost/tagsnip/blob/main/docs/tagsnip-docs.pdf">docs.pdf</a>
 
 `tagsnip` defines the command `\IncludeCode`, which is used as follows:
 
