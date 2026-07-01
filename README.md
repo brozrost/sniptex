@@ -31,7 +31,7 @@ Both parts are required.
 
 ### Installing the LaTeX package from CTAN
 
-Download the <a href="https://ctan.org/pkg/tagsnip">`tagsnip` package archive from CTAN</a> and extract it. For a local project installation, copy `tagsnip.sty` next to your main `.tex` file:
+Download <a href="https://mirrors.ctan.org/macros/luatex/latex/tagsnip.zip">**`tagsnip.zip`**</a> here or from the <a href="https://ctan.org/pkg/tagsnip">CTAN homepage</a> and extract it. For a local project installation, copy `tagsnip.sty` next to your main `.tex` file:
 
 ```sh
 project/
@@ -59,15 +59,13 @@ After installation, the backend must be available in the system `PATH` under the
 tagsnip --help
 ~~~
 
-## Compilation
-
-```sh
-lualatex --shell-escape docs/tagsnip-docs.tex
-```
-
 ## Usage
 
-**Example document:** <a href="https://github.com/brozrost/tagsnip/blob/main/docs/tagsnip-docs.pdf">docs.pdf</a>
+**Example document:** <a href="https://github.com/brozrost/tagsnip/blob/main/docs/tagsnip-docs.pdf">tagsnip-docs.pdf</a>
+
+```tex
+\usepackage{tagsnip}
+```
 
 `tagsnip` defines the command `\IncludeCode`, which is used as follows:
 
@@ -137,6 +135,12 @@ For example, a snippet marked with the tag `tag2` in a remote Python file can be
 </div>
 
 The remote file must be accessible over HTTP or HTTPS and must be readable as a plain text source file.
+
+## Compilation
+
+```sh
+lualatex --shell-escape docs/tagsnip-docs.tex
+```
 
 ## Architecture
 
