@@ -2,7 +2,7 @@
 """
 Entrypoint for `python -m tagsnip`
 """
-from .cli import main
+from .tagsnip_cli import main
 
 if __name__ == "__main__":
     main()

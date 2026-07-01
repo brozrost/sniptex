@@ -2,9 +2,9 @@ import sys
 import argparse
 from pathlib import Path
 
-from tagsnip import extractor
-from tagsnip import fetcher
-from tagsnip import validate
+from tagsnip import tagsnip_extractor
+from tagsnip import tagsnip_fetcher
+from tagsnip import tagsnip_validate
 
 def cleanup_generated_files(output_path: str) -> None:
     snippet_path = Path(output_path)
@@ -74,21 +74,21 @@ def main() -> int:
 
 
     try:
-        if validate.is_url(args.source):
-            fetch = fetcher.FetcherClient()
+        if tagsnip_validate.is_url(args.source):
+            fetch = tagsnip_fetcher.FetcherClient()
             text = fetch.fetch_text(args.source)
         else:
             text = Path(args.source).read_text(encoding="utf-8")
 
-        snippet, first_line_num, last_line_num = extractor.extract_tagged_block(text, args.tag)
+        snippet, first_line_num, last_line_num = tagsnip_extractor.extract_tagged_block(text, args.tag)
 
-    except fetcher.FetcherError as exc:
+    except tagsnip_fetcher.FetcherError as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
     except OSError:
         print(f"Error: Could not read file: {args.source}", file=sys.stderr)
         return 1
-    except extractor.TagsnipError as exc:
+    except tagsnip_extractor.TagsnipError as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
 

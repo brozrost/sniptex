@@ -1,4 +1,4 @@
-from tagsnip import extractor
+from tagsnip import tagsnip_extractor
 
 PATH = "./docs/example.py"
 
@@ -24,11 +24,11 @@ OUT = """def main():
     return 0"""
 
 def test_extract_tagged_block():
-    snippet, first_line_num, last_line_num = extractor.extract_tagged_block(TEXT, "demo")
+    snippet, first_line_num, last_line_num = tagsnip_extractor.extract_tagged_block(TEXT, "demo")
     assert snippet == OUT
 
 def test_extract_from_file():
-    snippet, first_line_num, last_line_num = extractor.extract_from_file(PATH, "tag1")
+    snippet, first_line_num, last_line_num = tagsnip_extractor.extract_from_file(PATH, "tag1")
     assert snippet == OUT
 
 def test_missing_start_tag():
@@ -38,9 +38,9 @@ def test_missing_start_tag():
     """
 
     try:
-        extractor.extract_tagged_block(text, "1")
+        tagsnip_extractor.extract_tagged_block(text, "1")
         assert False, "Expected TagsnipError"
-    except extractor.TagsnipError as err:
+    except tagsnip_extractor.TagsnipError as err:
         assert str(err) == "Start tag not found for '1'"
 
 
@@ -51,9 +51,9 @@ def test_missing_end_tag():
     """
 
     try:
-        extractor.extract_tagged_block(text, "1")
+        tagsnip_extractor.extract_tagged_block(text, "1")
         assert False, "Expected TagsnipError"
-    except extractor.TagsnipError as err:
+    except tagsnip_extractor.TagsnipError as err:
         assert str(err) == "End tag not found for '1'"
 
 
@@ -67,16 +67,16 @@ def test_multiple_start_tags():
     """
 
     try:
-        extractor.extract_tagged_block(text, "1")
+        tagsnip_extractor.extract_tagged_block(text, "1")
         assert False, "Expected TagsnipError"
-    except extractor.TagsnipError as err:
+    except tagsnip_extractor.TagsnipError as err:
         assert str(err) == "Multiple start tags found for '1'"
 
 def test_missing_file():
     try:
-        extractor.extract_from_file("./does_not_exist.py", "1")
+        tagsnip_extractor.extract_from_file("./does_not_exist.py", "1")
         assert False, "Expected TagsnipError"
-    except extractor.TagsnipError:
+    except tagsnip_extractor.TagsnipError:
         pass
 
 def main():
